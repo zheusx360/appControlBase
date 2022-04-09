@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380.74 227.38">
+  <defs>
+    <style>
+      .a {
+        fill: #29235c;
+        opacity: 0.24;
+      }
+
+      .b, .e {
+        opacity: 0.15;
+        fill: #1d1d1b;
+      }
+
+      .b, .g {
+        font-size: 67.72px;
+        font-family: FranklinGothic-HeavyItalic, Franklin Gothic Heavy;
+        font-weight: 800;
+      }
+
+      .b, .e, .g, .h {
+        font-style: italic;
+      }
+
+      .c {
+        letter-spacing: -0.01em;
+      }
+
+      .d {
+        letter-spacing: 0em;
+      }
+
+      .e, .h {
+        font-size: 29.02px;
+        font-family: FranklinGothic-DemiItalic, Franklin Gothic Demi;
+        font-weight: 300;
+      }
+
+      .f {
+        letter-spacing: -0.01em;
+      }
+
+      .g, .h {
+        fill: #f6f6f6;
+      }
+    </style>
+  </defs>
+  <title>inicial-quadros</title>
+  <rect class="a" y="74.17" width="26.81" height="22.95" rx="4.15"/>
+  <rect class="a" x="8.74" y="105.5" width="14.96" height="16.99" rx="3.1"/>
+  <rect class="a" x="44.29" y="47.25" width="125.64" height="116.5" rx="16.89"/>
+  <rect class="a" x="217.5" y="71.52" width="137.86" height="108.73" rx="16.67"/>
+  <rect class="a" x="52.4" y="176.19" width="51.19" height="51.19" rx="11.63"/>
+  <rect class="a" x="288.96" y="22.01" width="37.6" height="33.68" rx="6.82"/>
+  <rect class="a" x="255.37" y="7.12" width="26.88" height="26.88" rx="7.81"/>
+  <rect class="a" x="117.64" y="171.23" width="32.01" height="32.01" rx="4.19"/>
+  <rect class="a" x="40.33" width="32.01" height="32.01" rx="4.19"/>
+  <rect class="a" x="83.2" y="9.07" width="26.81" height="22.95" rx="4.15"/>
+  <rect class="a" x="294.36" y="191.77" width="26.81" height="22.95" rx="4.15"/>
+  <rect class="a" x="364.73" y="66.94" width="16.01" height="16.01" rx="1.79"/>
+  <g>
+    <g>
+      <text class="b" transform="translate(0 139.07) scale(0.78 1)">CONT<tspan class="c" x="169.46" y="0">R</tspan><tspan class="d" x="213.6" y="0">OL BASE</tspan></text>
+      <text class="e" transform="translate(241.04 163.18) scale(1.03 1)"><tspan class="f">b</tspan><tspan x="15.46" y="0">y icomon</tspan></text>
+    </g>
+    <g>
+      <text class="g" transform="translate(1.61 135.45) scale(0.78 1)">CONT<tspan class="c" x="169.46" y="0">R</tspan><tspan class="d" x="213.6" y="0">OL BASE</tspan></text>
+      <text class="h" transform="translate(242.65 159.56) scale(1.03 1)"><tspan class="f">b</tspan><tspan x="15.46" y="0">y icomon</tspan></text>
+    </g>
+  </g>
+</svg>

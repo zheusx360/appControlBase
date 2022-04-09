@@ -1,0 +1,21 @@
+export default {
+  colors: {
+    bg: '#222',
+    prymaryLight: '#888',
+    primary: '#518',
+    textInput: '#111',
+    textButton: '#ccc',
+    titleColor: '#ccc',
+    iconColor: '#333',
+    input: '#717171',
+    text: '#aaa',
+    secondary: '#555',
+    black: '#000',
+    white: '#fff',
+    light: '#aaa',
+    grayNormal: '#a8a8b3',
+    grayDark: '#29292e',
+    buttonFooter: '#333',
+    translucid: 'rgba(52, 52, 52, 0.5)',
+  },
+};
