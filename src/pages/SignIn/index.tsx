@@ -23,8 +23,10 @@ export const SignIn: React.FC = () => {
   const [secure, setSecure] = useState(true);
   const [email, setEmail] = useState(initial.darkTheme);
   const [password, setPassword] = useState('');
+  const [load, setLoad] = useState(false);
 
   const handlerLogin = () => {
+    setLoad(true);
     const data = {
       email: email,
       password: password,
@@ -32,6 +34,7 @@ export const SignIn: React.FC = () => {
 
     if (!email || !password) {
       Alert.alert('Atenção', 'email e senha devem ser informados!');
+      setLoad(false);
       return;
     }
 
@@ -42,6 +45,9 @@ export const SignIn: React.FC = () => {
         initial.setUser(response.data.userAuth);
         initial.setToken(response.data.token);
         navigation.navigate('Home');
+        setTimeout(() => {
+          setLoad(false);
+        }, 200);
         return response.data;
       })
       .catch(error =>
@@ -83,6 +89,7 @@ export const SignIn: React.FC = () => {
           />
           <Button
             onPress={() => handlerLogin()}
+            loading={load}
             marginTop={30}
             label={'ACESSAR'}
           />

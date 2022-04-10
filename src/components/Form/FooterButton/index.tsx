@@ -4,8 +4,8 @@ import {Container, Text, Icons} from './styles';
 
 type Props = {
   label: string;
-  name: string;
-  size: number;
+  name?: string;
+  size?: number;
   onPress: (event: GestureResponderEvent) => void;
 };
 

@@ -8,12 +8,14 @@ import {
   ItemText,
   ItemContainer,
   Info,
+  LoadContainer,
 } from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {api} from '../../utils/api';
 import {InitialContext} from '../../contexts/initialContext';
 import {Button, FooterButton} from '../../components/Form';
 import {Alert, FlatList} from 'react-native';
+import LottieView from 'lottie-react-native';
 
 interface ScreenNavigation {
   navigate: (screen: string) => string;
@@ -24,6 +26,7 @@ export const Approved: React.FC = () => {
   const initial = React.useContext(InitialContext);
   const [data, setData] = useState([]);
   const user: {email?: string} = initial.user;
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     GetUsers();
@@ -36,6 +39,7 @@ export const Approved: React.FC = () => {
       })
       .then(response => {
         setData(response.data);
+        setLoading(false);
         return response.data;
       })
       .catch(error => console.log(error));
@@ -84,18 +88,29 @@ export const Approved: React.FC = () => {
         <TitleContainer>
           <Title>Aprovações Pendentes</Title>
         </TitleContainer>
-        <MiddleConteiner>
-          {data.length === 0 ? (
-            <Info>Não existem pendências para aprovação.</Info>
-          ) : (
-            <FlatList
-              data={data}
-              renderItem={obj => {
-                return renderItem(obj.item);
-              }}
-            />
-          )}
-        </MiddleConteiner>
+        {(loading && (
+          <MiddleConteiner>
+            <LoadContainer>
+              <LottieView
+                source={require('../../global/Lottie-anims/CircleLoading.json')}
+                autoPlay={true}
+              />
+            </LoadContainer>
+          </MiddleConteiner>
+        )) || (
+          <MiddleConteiner>
+            {data.length === 0 ? (
+              <Info>Não existem pendências para aprovação.</Info>
+            ) : (
+              <FlatList
+                data={data}
+                renderItem={obj => {
+                  return renderItem(obj.item);
+                }}
+              />
+            )}
+          </MiddleConteiner>
+        )}
       </Container>
       <FooterButton
         onPress={() => navigation.navigate('Home')}

@@ -72,3 +72,8 @@ export const Info = styled.Text`
   padding-bottom: 10px;
   color: ${props => props.theme.colors.titleColor};
 `;
+
+export const LoadContainer = styled.View`
+  height: 45%;
+  width: 45%;
+`;

@@ -3,6 +3,8 @@ import {Container, InputField, Icons, Iconbutton} from './styles';
 
 type Props = {
   placeholder?: string;
+  width?: number | string;
+  height?: number | string;
   secureTextEntry?: boolean;
   rightIcon?: boolean;
   iconName?: string;
@@ -13,11 +15,13 @@ type Props = {
 export const Input: React.FC<Props> = ({
   iconName = 'eye',
   rightIcon,
+  width = '80%',
+  height = 55,
   pressIcon,
   ...props
 }) => {
   return (
-    <Container>
+    <Container style={{width: width, height: height}}>
       <InputField {...props} />
       {rightIcon && (
         <Iconbutton onPress={pressIcon}>

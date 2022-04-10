@@ -7,7 +7,8 @@ export const Container = styled.View`
   background-color: ${props => props.theme.colors.bg};
 `;
 
-export const AnimContainer = styled.View`
+export const TopContainer = styled.View`
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -46,4 +47,9 @@ export const Name = styled.Text`
 export const ScrollMenu = styled.ScrollView`
   flex: 1;
   width: 100%;
+`;
+
+export const IconUserContainer = styled.View`
+  width: 55px;
+  height: 55px;
 `;

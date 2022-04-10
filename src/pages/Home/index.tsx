@@ -1,8 +1,9 @@
 import React from 'react';
 import {
   Container,
-  AnimContainer,
+  TopContainer,
   MiddleConteiner,
+  IconUserContainer,
   Name,
   Title,
   ScrollMenu,
@@ -13,6 +14,7 @@ import * as Animatable from 'react-native-animatable';
 import {useNavigation} from '@react-navigation/native';
 import {InitialContext} from '../../contexts/initialContext';
 import {Button} from '../../components/Form';
+import LottieView from 'lottie-react-native';
 
 const AnimatedIcon = Animatable.createAnimatableComponent(Name);
 interface ScreenNavigation {
@@ -35,11 +37,19 @@ export const Home: React.FC = () => {
   return (
     <>
       <Container>
-        <AnimContainer>
-          <AnimatedIcon animation="zoomIn" useNativeDriver duration={2500}>
+        <TopContainer>
+          <IconUserContainer>
+            <LottieView
+              source={require('../../global/Lottie-anims/User.json')}
+              autoPlay
+              loop={false}
+              speed={0.35}
+            />
+          </IconUserContainer>
+          <AnimatedIcon animation="zoomIn" useNativeDriver duration={1800}>
             Olá, {user.name}
           </AnimatedIcon>
-        </AnimContainer>
+        </TopContainer>
         <TitleContainer>
           <Title>MENU DE SELEÇÃO</Title>
         </TitleContainer>

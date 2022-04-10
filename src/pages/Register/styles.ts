@@ -29,3 +29,10 @@ export const MiddleContainer = styled.View`
   width: 98%;
   background-color: ${props => props.theme.colors.translucid};
 `;
+
+export const IconLottie = styled.View`
+  height: 100px;
+  width: 100px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+`;

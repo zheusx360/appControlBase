@@ -1,11 +1,18 @@
 import React, {useState} from 'react';
-import {Container, Title, ConteinerDrop, MiddleContainer} from './styles';
+import {
+  Container,
+  Title,
+  ConteinerDrop,
+  MiddleContainer,
+  IconLottie,
+} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {InitialContext} from '../../contexts/initialContext';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {api} from '../../utils/api';
 import {Alert} from 'react-native';
 import {Input, Button, FooterButton} from '../../components/Form';
+import LottieView from 'lottie-react-native';
 
 interface ScreenNavigationProps {
   navigate: (secreen: string) => void;
@@ -46,8 +53,17 @@ export const Register: React.FC = () => {
   ]);
 
   //Variaveis que contem a montagem da tela conforme a seleção
+
+  //Renderização do Usuário
   const User = () => (
     <>
+      <IconLottie>
+        <LottieView
+          source={require('../../global/Lottie-anims/User.json')}
+          autoPlay
+          loop={false}
+        />
+      </IconLottie>
       <Input placeholder="Nome" onChangeText={v => setName(v)} />
       <Input placeholder="Registro" onChangeText={v => setRegister(v)} />
       <Input placeholder="Setor" onChangeText={v => setSector(v)} />
@@ -59,8 +75,16 @@ export const Register: React.FC = () => {
     </>
   );
 
+  //Renderização do pc
   const Pc = () => (
     <>
+      <IconLottie>
+        <LottieView
+          source={require('../../global/Lottie-anims/notebook.json')}
+          autoPlay
+          loop={false}
+        />
+      </IconLottie>
       <Input placeholder="Service Tag" onChangeText={v => setStag(v)} />
       <Input placeholder="Modelo" onChangeText={v => setModelPc(v)} />
       <Input placeholder="Memória" onChangeText={v => setMemory(v)} />
@@ -72,8 +96,16 @@ export const Register: React.FC = () => {
       />
     </>
   );
+  //Renderização do Monitor
   const Monitor = () => (
     <>
+      <IconLottie>
+        <LottieView
+          source={require('../../global/Lottie-anims/Computer.json')}
+          autoPlay
+          loop={false}
+        />
+      </IconLottie>
       <Input placeholder="Patrimonio" onChangeText={v => setPatrimony(v)} />
       <Input placeholder="Marca" onChangeText={v => setBrand(v)} />
       <Input placeholder="Modelo" onChangeText={v => setModel(v)} />
@@ -139,11 +171,12 @@ export const Register: React.FC = () => {
       }
       const data = {
         serviceTag: sTag,
-        model: model,
+        model: modelPc,
         memoria: memory,
         patrimonio: patrimonyPc,
         status: 'available',
       };
+      console.log(data);
       SaveData(data, '/micros');
     }
     //Registro do Monitor na base de dados
