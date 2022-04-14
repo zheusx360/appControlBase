@@ -33,6 +33,7 @@ export const AuthRoutes: React.FC = () => {
         <Auth.Screen name="SignIn" component={Pages.SignIn} />
         <Auth.Screen name="SignUp" component={Pages.SignUp} />
         <Auth.Screen name="Loan" component={Pages.Loan} />
+        <Auth.Screen name="Devolutions" component={Pages.Devolutions} />
       </Auth.Navigator>
     </ThemeProvider>
   );

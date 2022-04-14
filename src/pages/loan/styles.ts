@@ -46,6 +46,19 @@ export const RenderInfo = styled.Text`
   margin-bottom: 8px;
   align-self: center;
 `;
+export const InfoNotItens = styled.Text`
+  margin-top: 2px;
+  font-size: 16px;
+  font-weight: 600;
+  font-style: italic;
+  color: ${props => props.theme.colors.titleColor};
+  margin-top: 25px;
+  align-self: center;
+  padding: 8px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background-color: ${props => props.theme.colors.primary};
+`;
 
 export const ContainerRender = styled.View`
   width: 85%;

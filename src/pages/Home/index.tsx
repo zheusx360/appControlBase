@@ -30,10 +30,6 @@ export const Home: React.FC = () => {
     type?: string;
   } = initial.user;
 
-  console.log('User: ', user.name);
-  console.log('UserType: ', user.type);
-  console.log(user.type === 'admin');
-
   return (
     <>
       <Container>

@@ -41,7 +41,6 @@ export const SignIn: React.FC = () => {
     api
       .post('/user-system/login', data)
       .then(response => {
-        console.log(response.data);
         initial.setUser(response.data.userAuth);
         initial.setToken(response.data.token);
         navigation.navigate('Home');

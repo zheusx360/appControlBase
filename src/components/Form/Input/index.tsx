@@ -8,6 +8,7 @@ type Props = {
   secureTextEntry?: boolean;
   rightIcon?: boolean;
   iconName?: string;
+  sizeIcon?: number;
   pressIcon?: () => void;
   onChangeText?: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -17,6 +18,7 @@ export const Input: React.FC<Props> = ({
   rightIcon,
   width = '80%',
   height = 55,
+  sizeIcon = 20,
   pressIcon,
   ...props
 }) => {
@@ -25,7 +27,7 @@ export const Input: React.FC<Props> = ({
       <InputField {...props} />
       {rightIcon && (
         <Iconbutton onPress={pressIcon}>
-          <Icons name={iconName} size={20} />
+          <Icons name={iconName} size={sizeIcon} />
         </Iconbutton>
       )}
     </Container>
