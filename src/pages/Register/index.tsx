@@ -119,6 +119,7 @@ export const Register: React.FC = () => {
 
   //Limpa os campos apos os dados serem inseridos na base de dados
   const clear = () => {
+    console.log('Passou aqui>>>>');
     const val = value;
     setValue('');
     setValue(val);

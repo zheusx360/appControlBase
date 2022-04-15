@@ -57,8 +57,23 @@ export const Loan: React.FC = () => {
     setRegister('');
     setSelectMicro('Nenhum micro selecionado');
     setSelectMonitor('Nenhum monitor selecionado');
-    setMicroId('');
-    setMonitorId('');
+    setMicroId({});
+    setMonitorId({});
+  };
+
+  const getNameUser = async body => {
+    let name = 'NA';
+    await api
+      .post('/user/veryfy', body, {headers: {'x-access-token': token}})
+      .then(response => {
+        console.log('NomeUsuário:', response.data.name);
+        name = response.data.name;
+        return response.data;
+      })
+      .catch(error => {
+        return false;
+      });
+    return name;
   };
 
   //Metodo que executa a função get
@@ -83,7 +98,6 @@ export const Loan: React.FC = () => {
       .post(url, body, {headers: {'x-access-token': token}})
       .then(response => {
         retorno = true;
-        console.log('POST: ', response.data);
         return response.data;
       })
       .catch(error => {
@@ -109,8 +123,20 @@ export const Loan: React.FC = () => {
 
   //Método que realiza o empréstimo caso os dados fornecidos estejam de acordo
   const SendLoan = async () => {
-    const pat: {patrimonio?: string; id?: string} = monitorId;
-    const serv: {service?: string; id?: string} = microId;
+    const pat: {
+      id?: string;
+      marca?: string;
+      modelo?: string;
+      patrimonio?: string;
+    } = monitorId;
+
+    const serv: {
+      id?: string;
+      service?: string;
+      modelo?: string;
+      memoria?: string;
+      patrimonio?: string;
+    } = microId;
 
     if (!register) {
       Message('Atenção', 'Número de registro do usuário deve ser informado!');
@@ -128,16 +154,26 @@ export const Loan: React.FC = () => {
     const userValidate = await PostMethod('/user/veryfy', userReg);
 
     if (userValidate) {
+      const getName = await getNameUser(userReg);
+      console.log('Get: ', getName);
       const newData = moment().format('D MMMM YYYY, h:mm:ss a');
 
       const data = {
         user: register,
-        patrimonio: pat.patrimonio || 'NA',
-        monitorId: pat.id || 'NA',
-        serviceTag: serv.service || 'NA',
-        microId: serv.id || 'NA',
+        userName: getName,
         date: newData,
         loanBy: userName.name,
+        microId: serv.id || 'NA',
+        serviceTag: serv.service || 'NA',
+        modelPc: serv.modelo,
+        memory: serv.memoria,
+        patrimonioPc: serv.patrimonio || 'NA',
+        patrimonio: pat.patrimonio || 'NA',
+        monitorId: pat.id || 'NA',
+        marcaMonitor: pat.marca || 'NA',
+        modelMonitor: pat.modelo,
+        checkMicro: true,
+        checkMonitor: true,
       };
 
       PostMethod('/loan', data);
@@ -157,10 +193,13 @@ export const Loan: React.FC = () => {
         loanFor: register,
       };
 
-      if (monitorId) {
+      //Metodo para verificar se um objeto é vazio: Object.values(monitorId).length > 0
+      if (Object.values(monitorId).length > 0) {
+        console.log('Passou monitor', monitorId);
         PatchMethod(`/monitor/${pat.patrimonio}`, dataMicro);
       }
-      if (microId) {
+      if (Object.values(microId).length > 0) {
+        console.log('Passou micro', microId);
         PatchMethod(`/micros/${serv.service}`, dataMonitor);
       }
       SaveSucess();
@@ -178,11 +217,17 @@ export const Loan: React.FC = () => {
     setSelectMonitor(
       `Marca: ${marca} - Modelo: ${modelo} - Pat: ${patrimonio}`,
     );
-    setMonitorId({patrimonio, id});
+    setMonitorId({id, patrimonio, marca, modelo});
   };
-  const Micro = (id, modelo, memoria, service) => {
+  const Micro = (id, service, modelo, memoria, patrimonio) => {
     setSelectMicro(`Modelo: ${modelo} - Memória: ${memoria} - St: ${service}`);
-    setMicroId({service, id});
+    setMicroId({
+      id: id,
+      service: service,
+      memoria: memoria,
+      modelo: modelo,
+      patrimonio: patrimonio,
+    });
   };
 
   const Message = (title, message) => {
@@ -232,7 +277,9 @@ export const Loan: React.FC = () => {
         fontSize={14}
         width={85}
         heigth={38}
-        onPress={() => Micro(obj._id, obj.model, obj.memoria, obj.serviceTag)}
+        onPress={() =>
+          Micro(obj._id, obj.serviceTag, obj.model, obj.memoria, obj.patrimonio)
+        }
       />
     </ContainerRender>
   );
