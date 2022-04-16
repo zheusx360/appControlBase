@@ -8,4 +8,5 @@ export interface Loan {
   patrimonio: string;
   serviceTag: string;
   user: string;
+  message: any;
 }

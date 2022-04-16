@@ -62,9 +62,7 @@ export const Home: React.FC = () => {
                   label={'USUÁRIO DO SISTEMA'}
                   fontSize={20}
                   width={'70%'}
-                  onPress={() =>
-                    Alert.alert('Route', 'update Delete User System')
-                  }
+                  onPress={() => navigation.navigate('UserSystem')}
                 />
               </>
             )}
@@ -81,7 +79,7 @@ export const Home: React.FC = () => {
             <Button
               label={'CONSULTAS'}
               width={'70%'}
-              onPress={() => Alert.alert('Route', 'find Micro Monitor')}
+              onPress={() => navigation.navigate('Query')}
             />
           </MiddleConteiner>
         </ScrollMenu>

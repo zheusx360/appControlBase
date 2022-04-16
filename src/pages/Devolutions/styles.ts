@@ -25,6 +25,16 @@ export const Title = styled.Text`
   color: ${props => props.theme.colors.titleColor};
   margin-bottom: 8px;
 `;
+export const InfoTitle = styled.Text`
+  margin-top: 20px;
+  font-size: 23px;
+  font-weight: 600;
+  padding: 4px;
+  border-radius: 8px;
+  color: ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.translucidPink};
+  margin-bottom: 8px;
+`;
 export const SubTitle = styled.Text`
   margin-top: 20px;
   font-size: 14px;

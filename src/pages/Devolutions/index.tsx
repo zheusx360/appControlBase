@@ -1,4 +1,4 @@
-import React, {cloneElement, useState} from 'react';
+import React, {useState} from 'react';
 import {Button, FooterButton, Input} from '../../components/Form';
 import {
   Container,
@@ -14,6 +14,7 @@ import {
   ViewColumn,
   ViewCheck,
   ViewButton,
+  InfoTitle,
 } from './styles';
 import {useNavigation} from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
@@ -56,11 +57,59 @@ export const Devolutions: React.FC = () => {
       );
   };
 
+  const PatchMethod = async (url, body) => {
+    await api
+      .patch<Loan[]>(url, body, {headers: {'x-access-token': token}})
+      .then(response => {
+        Alert.alert('Atenção!', response.data.message, [
+          {text: 'OK', onPress: () => GetMethod(`/loan/${register}`, setData)},
+        ]);
+        return response.data;
+      })
+      .catch(error => Message('Erro!', error.response.data.message));
+  };
+
   const Search = value => {
     if (!value) {
       Message('Atenção', 'Insira algum dado para sua consulta');
     }
     GetMethod(`/loan/${register}`, setData);
+  };
+
+  //Metodo de envio da devolução para a base de dados
+  const SendLoan = (setMicro, setMonitor, Micro, Monitor, idLoan) => {
+    //Verifica se algum item foi selecionado para a devolução
+    let dataEnv = {};
+    if (!setMicro && !setMonitor) {
+      Message(
+        'Atenção',
+        'Deve selecionar um Micro ou Monitor para realizar a devolução',
+      );
+    }
+
+    if (setMicro && !setMonitor) {
+      if (Monitor === 'NA') {
+        console.log('Fechar o empréstimo pois não tem Monitor(Devolvido)');
+        dataEnv = {micro: Micro, monitor: 'NA', action: 'close'};
+      } else {
+        console.log('Devolver apenas o Micro empréstimo ainda em aberto');
+        dataEnv = {micro: Micro, monitor: 'NA', action: 'open'};
+      }
+    }
+    if (!setMicro && setMonitor) {
+      if (Micro === 'NA') {
+        console.log('Fechar o empréstimo pois não tem Micro(Devolvido)');
+        dataEnv = {micro: 'NA', monitor: Monitor, action: 'close'};
+      } else {
+        console.log('Devolver apenas o Monitor empréstimo ainda em aberto');
+        dataEnv = {micro: 'NA', monitor: Monitor, action: 'open'};
+      }
+    }
+    if (setMicro && setMonitor) {
+      console.log('Devolver os dois e fechar o empréstimo');
+      dataEnv = {micro: Micro, monitor: Monitor, action: 'close'};
+    }
+    PatchMethod(`/loan/devolution/${idLoan}`, dataEnv);
   };
 
   //Metodo para receber os checkbox da flatList
@@ -75,6 +124,19 @@ export const Devolutions: React.FC = () => {
     setMethod(newIds);
     console.log(setItem.includes(id));
   };
+
+  const InitialRender = () => (
+    <>
+      <Container>
+        <LottieView
+          source={require('../../global/Lottie-anims/ListaVazia.json')}
+          autoPlay={true}
+          loop={false}
+        />
+        <InfoTitle>Lista de empréstimo vazia</InfoTitle>
+      </Container>
+    </>
+  );
 
   const RenderItem = dataItens => {
     return (
@@ -140,10 +202,12 @@ export const Devolutions: React.FC = () => {
             <Button
               label="DEVOLVER"
               onPress={() =>
-                Alert.alert(
-                  'Teste',
-                  `Monitor: ${checkMonitor.includes(dataItens.patrimonio)}` +
-                    ` Micro: ${checkMicro.includes(dataItens.serviceTag)}`,
+                SendLoan(
+                  checkMicro.includes(dataItens.serviceTag),
+                  checkMonitor.includes(dataItens.patrimonio),
+                  dataItens.serviceTag,
+                  dataItens.patrimonio,
+                  dataItens._id,
                 )
               }
               width={100}
@@ -174,11 +238,15 @@ export const Devolutions: React.FC = () => {
           />
         </InputContainer>
         <ScrollMenu>
-          <FlatList
-            data={data}
-            renderItem={({item}) => RenderItem(item)}
-            keyExtractor={item => item._id}
-          />
+          {data.length === 0 ? (
+            <InitialRender />
+          ) : (
+            <FlatList
+              data={data}
+              renderItem={({item}) => RenderItem(item)}
+              keyExtractor={item => item._id}
+            />
+          )}
         </ScrollMenu>
       </Container>
       <FooterButton

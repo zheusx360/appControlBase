@@ -17,5 +17,7 @@ export default {
     grayDark: '#29292e',
     buttonFooter: '#333',
     translucid: 'rgba(52, 52, 52, 0.5)',
+    translucidDark: 'rgba(20, 20, 20, 0.6)',
+    translucidPink: 'rgba(153, 50, 204, 0.6)',
   },
 };
