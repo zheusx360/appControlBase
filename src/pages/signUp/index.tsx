@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {Container, Title} from './styles';
+import {Container, Title, IconView} from './styles';
 import {ScrollView, KeyboardAvoidingView, Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Input, Button, FooterButton} from '../../components/Form';
+import LottieView from 'lottie-react-native';
 import {api} from '../../utils/api';
 interface ScreenNavigationProps {
   navigate: (secreen: string) => void;
@@ -60,6 +61,14 @@ export const SignUp = () => {
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{flex: 1}}>
         <Container>
+          <IconView>
+            <LottieView
+              source={require('../../global/Lottie-anims/Login.json')}
+              autoPlay={true}
+              speed={0.8}
+              loop={false}
+            />
+          </IconView>
           <Title>CRIAR CONTA</Title>
           <Input
             placeholder="nome"

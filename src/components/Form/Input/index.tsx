@@ -9,6 +9,7 @@ type Props = {
   rightIcon?: boolean;
   iconName?: string;
   sizeIcon?: number;
+  editable?: boolean;
   pressIcon?: () => void;
   onChangeText?: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -19,12 +20,14 @@ export const Input: React.FC<Props> = ({
   width = '80%',
   height = 55,
   sizeIcon = 20,
+  editable = true,
   pressIcon,
   ...props
 }) => {
+  const color = editable ? '#fff' : '#898';
   return (
-    <Container style={{width: width, height: height}}>
-      <InputField {...props} />
+    <Container style={{width: width, height: height, backgroundColor: color}}>
+      <InputField editable={editable} {...props} />
       {rightIcon && (
         <Iconbutton onPress={pressIcon}>
           <Icons name={iconName} size={sizeIcon} />

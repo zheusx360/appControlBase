@@ -19,11 +19,12 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import {InitialContext} from '../../contexts/initialContext';
-import {Alert, FlatList} from 'react-native';
+import {Alert, FlatList, Keyboard} from 'react-native';
 import moment from 'moment';
 import {api} from '../../utils/api';
 import {Loan} from '../../interfaces';
 import CheckBox from '@react-native-community/checkbox';
+import CircleLoading from '../../common/circleLoading';
 
 interface ScreenNavigation {
   navigate: (screen: string) => string;
@@ -37,41 +38,53 @@ export const Devolutions: React.FC = () => {
   const [data, setData] = useState<Loan[]>([]);
   const [checkMicro, setCheckedMicro] = useState<boolean[]>([]);
   const [checkMonitor, setCheckedMonitor] = useState<boolean[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const Message = (title, subtitle) => {
     Alert.alert(title, subtitle);
   };
 
   //Metodo que executa a função get
   const GetMethod = async (url, setMethod) => {
+    Keyboard.dismiss();
     await api
       .get<Loan[]>(url, {headers: {'x-access-token': token}})
       .then(response => {
         console.log(response.data);
         setMethod(response.data);
+        setIsLoading(false);
         return response.data;
       })
-      .catch(error =>
+      .catch(error => {
         Alert.alert('Atenção!', JSON.stringify(error.response.data.message), [
           {text: 'OK', onPress: () => {}},
-        ]),
-      );
+        ]);
+        setIsLoading(false);
+      });
   };
 
   const PatchMethod = async (url, body) => {
+    setIsLoading(true);
     await api
       .patch<Loan[]>(url, body, {headers: {'x-access-token': token}})
       .then(response => {
         Alert.alert('Atenção!', response.data.message, [
           {text: 'OK', onPress: () => GetMethod(`/loan/${register}`, setData)},
         ]);
+        setIsLoading(false);
         return response.data;
       })
-      .catch(error => Message('Erro!', error.response.data.message));
+      .catch(error => {
+        Message('Erro!', error.response.data.message);
+        setIsLoading(false);
+      });
   };
 
   const Search = value => {
+    setIsLoading(true);
     if (!value) {
       Message('Atenção', 'Insira algum dado para sua consulta');
+      setIsLoading(false);
+      return;
     }
     GetMethod(`/loan/${register}`, setData);
   };
@@ -85,6 +98,7 @@ export const Devolutions: React.FC = () => {
         'Atenção',
         'Deve selecionar um Micro ou Monitor para realizar a devolução',
       );
+      return;
     }
 
     if (setMicro && !setMonitor) {
@@ -237,17 +251,24 @@ export const Devolutions: React.FC = () => {
             placeholder={'Insira sua consulta'}
           />
         </InputContainer>
-        <ScrollMenu>
-          {data.length === 0 ? (
-            <InitialRender />
-          ) : (
-            <FlatList
-              data={data}
-              renderItem={({item}) => RenderItem(item)}
-              keyExtractor={item => item._id}
-            />
-          )}
-        </ScrollMenu>
+        {isLoading && (
+          <ScrollMenu>
+            <CircleLoading />
+          </ScrollMenu>
+        )}
+        {!isLoading && (
+          <ScrollMenu>
+            {data.length === 0 ? (
+              <InitialRender />
+            ) : (
+              <FlatList
+                data={data}
+                renderItem={({item}) => RenderItem(item)}
+                keyExtractor={item => item._id}
+              />
+            )}
+          </ScrollMenu>
+        )}
       </Container>
       <FooterButton
         name="arrow-left"

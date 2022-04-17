@@ -52,20 +52,18 @@ export const Home: React.FC = () => {
         <ScrollMenu>
           <MiddleConteiner>
             {(user.type === 'admin' || user.type === 'super admin') && (
-              <>
-                <Button
-                  label={'APROVAÇÕES'}
-                  width={'70%'}
-                  onPress={() => navigation.navigate('Approved')}
-                />
-                <Button
-                  label={'USUÁRIO DO SISTEMA'}
-                  fontSize={20}
-                  width={'70%'}
-                  onPress={() => navigation.navigate('UserSystem')}
-                />
-              </>
+              <Button
+                label={'APROVAÇÕES'}
+                width={'70%'}
+                onPress={() => navigation.navigate('Approved')}
+              />
             )}
+            <Button
+              label={'USUÁRIO DO SISTEMA'}
+              fontSize={20}
+              width={'70%'}
+              onPress={() => navigation.navigate('UserSystem')}
+            />
             <Button
               label={'EMPRÉSTIMOS'}
               width={'70%'}

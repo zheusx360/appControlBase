@@ -12,6 +12,7 @@ type Props = {
   loading?: boolean;
   sizeIconLoading?: number;
   onPress: (event: GestureResponderEvent) => void;
+  color?: string;
 };
 
 export const Button: React.FC<Props> = ({
@@ -22,11 +23,13 @@ export const Button: React.FC<Props> = ({
   fontSize = 22,
   loading = false,
   sizeIconLoading = 120,
+  color = '',
   ...props
 }) => {
   return (
     <Container
       {...props}
+      color={color}
       style={{marginTop: marginTop, width: width, height: heigth}}>
       {(loading && (
         <LottieView

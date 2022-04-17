@@ -13,3 +13,7 @@ export const Title = styled.Text`
   color: ${props => props.theme.colors.titleColor};
   margin-bottom: 8px;
 `;
+export const IconView = styled.View`
+  width: 80px;
+  height: 80px;
+`;

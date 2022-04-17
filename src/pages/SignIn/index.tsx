@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Container, Title, ViewTop} from './styles';
+import {Container, Title, ViewTop, IconView} from './styles';
 import {ScrollView, KeyboardAvoidingView, Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {InitialContext} from '../../contexts/initialContext';
@@ -12,6 +12,7 @@ import {
   IconButton,
 } from '../../components/Form';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import LottieView from 'lottie-react-native';
 
 interface ScreenNavigationProps {
   navigate: (secreen: string) => void;
@@ -69,6 +70,14 @@ export const SignIn: React.FC = () => {
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{flex: 1}}>
         <Container>
+          <IconView>
+            <LottieView
+              source={require('../../global/Lottie-anims/Login.json')}
+              autoPlay={true}
+              speed={0.8}
+              loop={false}
+            />
+          </IconView>
           <ViewTop>
             <IconButton
               iconSize={20}

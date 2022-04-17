@@ -1,10 +1,15 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.TouchableOpacity`
+interface Props {
+  color: string;
+}
+
+export const Container = styled.TouchableOpacity<Props>`
   margin: 25px;
   width: 80%;
   height: 58px;
-  background-color: ${props => props.theme.colors.primary};
+  background-color: ${props =>
+    props.color ? props.color : props.theme.colors.primary};
   border-radius: 8px;
   justify-content: center;
   align-items: center;

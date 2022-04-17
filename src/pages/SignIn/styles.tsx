@@ -20,3 +20,8 @@ export const ViewTop = styled.View`
   left: 85%;
   right: 0%;
 `;
+
+export const IconView = styled.View`
+  width: 80px;
+  height: 80px;
+`;
