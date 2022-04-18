@@ -30,9 +30,6 @@ export const UserSystem: React.FC = () => {
   const permission: {type?: string; email?: string} = initial.user;
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log('Perm: ', permission.type === 'super admin');
-  console.log('Init', permission.email);
-
   const GetMethod = async date => {
     setIsLoading(true);
     Keyboard.dismiss();

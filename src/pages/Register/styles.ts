@@ -9,7 +9,7 @@ export const Container = styled.View`
 
 export const Title = styled.Text`
   margin-top: 20px;
-  font-size: 23px;
+  font-size: 21px;
   font-weight: 600;
   color: ${props => props.theme.colors.titleColor};
   margin-bottom: 8px;
@@ -35,4 +35,15 @@ export const IconLottie = styled.View`
   width: 100px;
   margin-bottom: 10px;
   border-radius: 12px;
+`;
+
+export const InfoTitle = styled.Text`
+  margin-top: 20px;
+  font-size: 23px;
+  font-weight: 600;
+  padding: 4px;
+  border-radius: 8px;
+  color: ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.translucidPink};
+  margin-bottom: 8px;
 `;

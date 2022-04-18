@@ -24,10 +24,15 @@ export const Input: React.FC<Props> = ({
   pressIcon,
   ...props
 }) => {
-  const color = editable ? '#fff' : '#898';
+  const color = editable ? '#fff' : '#a398b3';
+  const placeColor = editable ? '#888' : '#222';
   return (
     <Container style={{width: width, height: height, backgroundColor: color}}>
-      <InputField editable={editable} {...props} />
+      <InputField
+        editable={editable}
+        {...props}
+        placeholderTextColor={placeColor}
+      />
       {rightIcon && (
         <Iconbutton onPress={pressIcon}>
           <Icons name={iconName} size={sizeIcon} />

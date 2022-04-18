@@ -5,6 +5,7 @@ import {
   ConteinerDrop,
   MiddleContainer,
   IconLottie,
+  InfoTitle,
 } from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {InitialContext} from '../../contexts/initialContext';
@@ -217,7 +218,14 @@ export const Register: React.FC = () => {
           {(value === 'USUÁRIO' && User()) ||
             (value === 'COMPUTADOR' && Pc()) ||
             (value === 'MONITOR' && Monitor()) || (
-              <Title>Nenhum item selecionado</Title>
+              <>
+                <LottieView
+                  source={require('../../global/Lottie-anims/ListaVazia.json')}
+                  autoPlay={true}
+                  loop={false}
+                />
+                <InfoTitle>Nenhum item selecionado</InfoTitle>
+              </>
             )}
         </MiddleContainer>
       </Container>
