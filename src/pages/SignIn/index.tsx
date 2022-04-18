@@ -50,9 +50,10 @@ export const SignIn: React.FC = () => {
         }, 200);
         return response.data;
       })
-      .catch(error =>
+      .catch(error => {
         Alert.alert('Atenção', JSON.stringify(error.response.data.message)),
-      );
+          setLoad(false);
+      });
   };
 
   const switchSecure = () => {
@@ -101,14 +102,17 @@ export const SignIn: React.FC = () => {
             marginTop={30}
             label={'ACESSAR'}
           />
-          <TextButton onPress={() => {}} label={'Esqueci a Senha'} />
+          <TextButton
+            onPress={() => navigation.navigate('ForgotPassword')}
+            label={'Esqueci a Senha'}
+          />
         </Container>
       </ScrollView>
       <FooterButton
         onPress={() => navigation.navigate('SignUp')}
         name="log-in"
         size={20}
-        label="Criar Conta"
+        label="CRIAR CONTA"
       />
     </KeyboardAvoidingView>
   );

@@ -17,6 +17,7 @@ import {Alert, FlatList, Keyboard} from 'react-native';
 import {Input, Button, FooterButton} from '../../components/Form';
 import LottieView from 'lottie-react-native';
 import RadioForm from 'react-native-simple-radio-button';
+import CircleLoading from '../../common/circleLoading';
 
 interface ScreenNavigationProps {
   navigate: (secreen: string) => void;
@@ -87,7 +88,7 @@ export const Query: React.FC = () => {
                 color={'rgba(255, 0, 20, 0.65)'}
                 fontSize={18}
                 marginTop={0}
-                onPress={() => DeleteQuestion(url)}
+                onPress={() => DeleteQuestion(url, 'null')}
               />
             )}
           </ItensContainer>
@@ -163,7 +164,7 @@ export const Query: React.FC = () => {
                 color={'rgba(255, 0, 20, 0.65)'}
                 fontSize={18}
                 marginTop={0}
-                onPress={() => DeleteQuestion(url)}
+                onPress={() => DeleteQuestion(url, status)}
               />
             )}
           </ItensContainer>
@@ -226,7 +227,7 @@ export const Query: React.FC = () => {
                 color={'rgba(255, 0, 20, 0.65)'}
                 fontSize={18}
                 marginTop={0}
-                onPress={() => DeleteQuestion(url)}
+                onPress={() => DeleteQuestion(url, status)}
               />
             )}
           </ItensContainer>
@@ -259,6 +260,7 @@ export const Query: React.FC = () => {
 
   //Metodo que executa a função get
   const GetMethod = async () => {
+    setIsLoading(true);
     let url;
     if (items === 'Usuário') {
       url = txtSearch === '' ? '/user' : `/user/${txtSearch}`;
@@ -289,11 +291,19 @@ export const Query: React.FC = () => {
       });
   };
 
-  const DeleteQuestion = url => {
-    Alert.alert('Atenção!', 'Deseja realmente deletar esse dado?', [
-      {text: 'SIM', onPress: () => DeleteMethod(url)},
-      {text: 'NÃO', onPress: () => {}},
-    ]);
+  const DeleteQuestion = (url, status) => {
+    if (status === 'rent') {
+      Alert.alert(
+        'Atenção!',
+        'Esse item está emprestado, você deve fazer a devolução antes de deletar.',
+        [{text: 'OK', onPress: () => {}}],
+      );
+    } else {
+      Alert.alert('Atenção!', 'Deseja realmente deletar esse dado?', [
+        {text: 'SIM', onPress: () => DeleteMethod(url)},
+        {text: 'NÃO', onPress: () => {}},
+      ]);
+    }
   };
 
   const DeleteMethod = async url => {
@@ -344,26 +354,32 @@ export const Query: React.FC = () => {
           sizeIcon={24}
           onChangeText={v => setTxtSearch(v)}
         />
-        <MiddleContainer>
-          {(data.length > 0 && (
-            <ScrollMenu>
-              <FlatList
-                data={data}
-                renderItem={({item}) => SelectRender(item)}
-                keyExtractor={item => item._id}
-              />
-            </ScrollMenu>
-          )) || (
-            <>
-              <LottieView
-                source={require('../../global/Lottie-anims/ListaVazia.json')}
-                autoPlay={true}
-                loop={false}
-              />
-              <InfoTitle>Nenhum item encontrado</InfoTitle>
-            </>
-          )}
-        </MiddleContainer>
+        {isLoading ? (
+          <MiddleContainer>
+            <CircleLoading />
+          </MiddleContainer>
+        ) : (
+          <MiddleContainer>
+            {(data.length > 0 && (
+              <ScrollMenu>
+                <FlatList
+                  data={data}
+                  renderItem={({item}) => SelectRender(item)}
+                  keyExtractor={item => item._id}
+                />
+              </ScrollMenu>
+            )) || (
+              <>
+                <LottieView
+                  source={require('../../global/Lottie-anims/ListaVazia.json')}
+                  autoPlay={true}
+                  loop={false}
+                />
+                <InfoTitle>Nenhum item encontrado</InfoTitle>
+              </>
+            )}
+          </MiddleContainer>
+        )}
       </Container>
 
       <FooterButton

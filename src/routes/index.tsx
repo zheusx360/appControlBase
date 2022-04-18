@@ -36,6 +36,7 @@ export const AuthRoutes: React.FC = () => {
         <Auth.Screen name="Devolutions" component={Pages.Devolutions} />
         <Auth.Screen name="UserSystem" component={Pages.UserSystem} />
         <Auth.Screen name="Query" component={Pages.Query} />
+        <Auth.Screen name="ForgotPassword" component={Pages.ForgotPassword} />
       </Auth.Navigator>
     </ThemeProvider>
   );

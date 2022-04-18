@@ -8,6 +8,6 @@ import { Loan } from './loan'
 import { Devolutions } from './Devolutions'
 import { UserSystem } from './userSystem'
 import { Query } from './Query/Query'
+import {ForgotPassword} from './forgotPassword'
 
-
-export {Approved, Home, Initial, Register, SignIn, SignUp, Loan, Devolutions, UserSystem, Query}
+export {Approved, Home, Initial, Register, SignIn, SignUp, Loan, Devolutions, UserSystem, Query, ForgotPassword}

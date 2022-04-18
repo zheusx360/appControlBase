@@ -5,6 +5,7 @@ import {useNavigation} from '@react-navigation/native';
 import {Input, Button, FooterButton} from '../../components/Form';
 import LottieView from 'lottie-react-native';
 import {api} from '../../utils/api';
+import {validate} from 'react-email-validator';
 interface ScreenNavigationProps {
   navigate: (secreen: string) => void;
 }
@@ -25,6 +26,23 @@ export const SignUp = () => {
 
     if (email === '' || name === '' || password === '') {
       Alert.alert('Atenção', 'Os campos devem ser preenchido!');
+      return;
+    }
+
+    const validEmail = validate(email);
+    if (!validEmail) {
+      Alert.alert(
+        'Atenção',
+        'Email inválido, insira um email válido para criar sua conta. Exemplo: seuemail@email.com ',
+      );
+      return;
+    }
+
+    if (password.length < 6) {
+      Alert.alert(
+        'Atenção',
+        'A senha deve conter no minimo seis (6) caracteres.',
+      );
       return;
     }
 
