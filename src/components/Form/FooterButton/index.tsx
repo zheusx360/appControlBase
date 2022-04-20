@@ -6,6 +6,7 @@ type Props = {
   label: string;
   name?: string;
   size?: number;
+  radius?: number;
   onPress: (event: GestureResponderEvent) => void;
 };
 
@@ -13,10 +14,13 @@ export const FooterButton: React.FC<Props> = ({
   label,
   name,
   size,
+  radius,
   ...props
 }) => {
   return (
-    <Container {...props}>
+    <Container
+      style={{borderTopLeftRadius: radius, borderTopRightRadius: radius}}
+      {...props}>
       <Icons name={name} size={size} />
       <Text>{label}</Text>
     </Container>

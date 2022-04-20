@@ -71,6 +71,9 @@ export const Info = styled.Text`
   text-align: center;
   padding-bottom: 10px;
   color: ${props => props.theme.colors.titleColor};
+  background-color: ${props => props.theme.colors.translucidPink};
+  padding: 5px;
+  border-radius: 8px;
 `;
 
 export const LoadContainer = styled.View`

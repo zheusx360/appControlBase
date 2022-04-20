@@ -11,6 +11,8 @@ export const TopContainer = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
   width: 100%;
   height: 60px;
   background-color: ${props => props.theme.colors.buttonFooter};

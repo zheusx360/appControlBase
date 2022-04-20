@@ -17,3 +17,14 @@ export const IconView = styled.View`
   width: 80px;
   height: 80px;
 `;
+export const Middle = styled.View`
+  width: 96%;
+  height: 75%;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom-left-radius: 70px;
+  border-top-right-radius: 70px;
+  background-color: ${props => props.theme.colors.translucid};
+`;

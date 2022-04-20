@@ -25,7 +25,7 @@ export const AuthRoutes: React.FC = () => {
     <ThemeProvider theme={theme[initial.darkTheme || 'light']}>
       <Auth.Navigator
         initialRouteName="Initial"
-        screenOptions={{headerShown: false, statusBarHidden: true}}>
+        screenOptions={{headerShown: false}}>
         <Auth.Screen name="Approved" component={Pages.Approved} />
         <Auth.Screen name="Initial" component={Pages.Initial} />
         <Auth.Screen name="Home" component={Pages.Home} />

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Container, Title, IconView} from './styles';
+import {Container, Title, IconView, Middle} from './styles';
 import {ScrollView, KeyboardAvoidingView, Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Input, Button, FooterButton} from '../../components/Form';
@@ -12,6 +12,7 @@ interface ScreenNavigationProps {
 
 export const SignUp = () => {
   const [secure, setSecure] = useState(true);
+  const [secureConfirm, setSecureConfirm] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -70,9 +71,6 @@ export const SignUp = () => {
       );
   };
 
-  const switchSecure = () => {
-    setSecure(!secure);
-  };
   return (
     <KeyboardAvoidingView enabled style={{flex: 1}} behavior={'padding'}>
       <ScrollView
@@ -87,34 +85,40 @@ export const SignUp = () => {
               loop={false}
             />
           </IconView>
-          <Title>CRIAR CONTA</Title>
-          <Input
-            placeholder="nome"
-            secureTextEntry={false}
-            onChangeText={value => setName(value)}
-          />
-          <Input
-            placeholder="email"
-            secureTextEntry={false}
-            onChangeText={value => setEmail(value)}
-          />
-          <Input
-            placeholder="senha"
-            pressIcon={() => switchSecure()}
-            rightIcon={true}
-            iconName={secure ? 'eye' : 'eye-off'}
-            secureTextEntry={secure}
-            onChangeText={value => setPassword(value)}
-          />
-          <Input
-            placeholder="confirmar senha"
-            pressIcon={() => switchSecure()}
-            rightIcon={true}
-            iconName={secure ? 'eye' : 'eye-off'}
-            secureTextEntry={secure}
-            onChangeText={value => setConfirmPassword(value)}
-          />
-          <Button onPress={() => handleSignUp()} label={'CRIAR CONTA'} />
+          <Middle>
+            <Title>CRIAR CONTA</Title>
+            <Input
+              placeholder="nome"
+              secureTextEntry={false}
+              onChangeText={value => setName(value)}
+            />
+            <Input
+              placeholder="email"
+              secureTextEntry={false}
+              onChangeText={value => setEmail(value)}
+            />
+            <Input
+              placeholder="senha"
+              pressIcon={() => setSecure(!secure)}
+              rightIcon={true}
+              iconName={secure ? 'eye' : 'eye-off'}
+              secureTextEntry={secure}
+              onChangeText={value => setPassword(value)}
+            />
+            <Input
+              placeholder="confirmar senha"
+              pressIcon={() => setSecureConfirm(!secureConfirm)}
+              rightIcon={true}
+              iconName={secureConfirm ? 'eye' : 'eye-off'}
+              secureTextEntry={secureConfirm}
+              onChangeText={value => setConfirmPassword(value)}
+            />
+            <Button
+              radius={25}
+              onPress={() => handleSignUp()}
+              label={'CRIAR CONTA'}
+            />
+          </Middle>
         </Container>
       </ScrollView>
       <FooterButton

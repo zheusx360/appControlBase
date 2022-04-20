@@ -11,6 +11,8 @@ type Props = {
   fontSize?: number;
   loading?: boolean;
   sizeIconLoading?: number;
+  styleRadius?: number;
+  radius?: number;
   onPress: (event: GestureResponderEvent) => void;
   color?: string;
 };
@@ -24,13 +26,24 @@ export const Button: React.FC<Props> = ({
   loading = false,
   sizeIconLoading = 120,
   color = '',
+  styleRadius,
+  radius = styleRadius === undefined ? 8 : 0,
   ...props
 }) => {
   return (
     <Container
       {...props}
       color={color}
-      style={{marginTop: marginTop, width: width, height: heigth}}>
+      style={[
+        {
+          marginTop: marginTop,
+          width: width,
+          height: heigth,
+          borderRadius: radius,
+          borderTopLeftRadius: styleRadius,
+          borderBottomRightRadius: styleRadius,
+        },
+      ]}>
       {(loading && (
         <LottieView
           source={require('../../../global/Lottie-anims/CircleLoading.json')}

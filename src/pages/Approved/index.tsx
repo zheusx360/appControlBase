@@ -100,7 +100,14 @@ export const Approved: React.FC = () => {
         )) || (
           <MiddleConteiner>
             {data.length === 0 ? (
-              <Info>Não existem pendências para aprovação.</Info>
+              <>
+                <LottieView
+                  source={require('../../global/Lottie-anims/ListaVazia.json')}
+                  autoPlay={true}
+                  loop={false}
+                />
+                <Info>Não existem pendências para aprovação.</Info>
+              </>
             ) : (
               <FlatList
                 data={data}

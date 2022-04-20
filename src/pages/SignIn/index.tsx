@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Container, Title, ViewTop, IconView} from './styles';
+import {Container, Title, ViewTop, IconView, Middle} from './styles';
 import {ScrollView, KeyboardAvoidingView, Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {InitialContext} from '../../contexts/initialContext';
@@ -22,7 +22,7 @@ export const SignIn: React.FC = () => {
   const navigation = useNavigation<ScreenNavigationProps>();
   const initial = React.useContext(InitialContext);
   const [secure, setSecure] = useState(true);
-  const [email, setEmail] = useState(initial.darkTheme);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [load, setLoad] = useState(false);
 
@@ -45,6 +45,8 @@ export const SignIn: React.FC = () => {
         initial.setUser(response.data.userAuth);
         initial.setToken(response.data.token);
         navigation.navigate('Home');
+        setEmail('');
+        setPassword('');
         setTimeout(() => {
           setLoad(false);
         }, 200);
@@ -86,26 +88,34 @@ export const SignIn: React.FC = () => {
               onPress={() => switchTheme()}
             />
           </ViewTop>
-          <Title>LOGIN</Title>
-          <Input placeholder="e-mail" onChangeText={value => setEmail(value)} />
-          <Input
-            placeholder="senha"
-            rightIcon={true}
-            pressIcon={() => switchSecure()}
-            iconName={secure ? 'eye' : 'eye-off'}
-            secureTextEntry={secure}
-            onChangeText={value => setPassword(value)}
-          />
-          <Button
-            onPress={() => handlerLogin()}
-            loading={load}
-            marginTop={30}
-            label={'ACESSAR'}
-          />
-          <TextButton
-            onPress={() => navigation.navigate('ForgotPassword')}
-            label={'Esqueci a Senha'}
-          />
+          <Middle>
+            <Title>LOGIN</Title>
+            <Input
+              placeholder="e-mail"
+              value={email}
+              onChangeText={value => setEmail(value)}
+            />
+            <Input
+              placeholder="senha"
+              rightIcon={true}
+              pressIcon={() => switchSecure()}
+              iconName={secure ? 'eye' : 'eye-off'}
+              value={password}
+              secureTextEntry={secure}
+              onChangeText={value => setPassword(value)}
+            />
+            <Button
+              onPress={() => handlerLogin()}
+              loading={load}
+              marginTop={30}
+              radius={25}
+              label={'ACESSAR'}
+            />
+            <TextButton
+              onPress={() => navigation.navigate('ForgotPassword')}
+              label={'Esqueci a Senha'}
+            />
+          </Middle>
         </Container>
       </ScrollView>
       <FooterButton
