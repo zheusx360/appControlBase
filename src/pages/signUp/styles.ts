@@ -14,8 +14,9 @@ export const Title = styled.Text`
   margin-bottom: 8px;
 `;
 export const IconView = styled.View`
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 10px;
 `;
 export const Middle = styled.View`
   width: 96%;

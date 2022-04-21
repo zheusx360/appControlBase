@@ -75,7 +75,7 @@ export const SignIn: React.FC = () => {
         <Container>
           <IconView>
             <LottieView
-              source={require('../../global/Lottie-anims/Login.json')}
+              source={require('../../global/Lottie-anims/LoginG.json')}
               autoPlay={true}
               speed={0.8}
               loop={false}

@@ -22,8 +22,9 @@ export const ViewTop = styled.View`
 `;
 
 export const IconView = styled.View`
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 10px;
 `;
 
 export const Middle = styled.View`
