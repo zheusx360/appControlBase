@@ -91,6 +91,16 @@ export const ForgotPassword: React.FC = () => {
   const SavePassword = async () => {
     setIsLoading(true);
     Keyboard.dismiss();
+
+    if (txtPass.length < 6) {
+      Message(
+        'Erro de senha',
+        'A senha deve conter pelo menos seis(6) caracteres',
+      );
+      setIsLoading(false);
+      return;
+    }
+
     if (txtPass !== txtConfirmPass) {
       Message(
         'Erro de confirmação',
